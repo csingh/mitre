@@ -14,8 +14,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_195641) do
   create_table "entities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "sentences_id", null: false
-    t.index ["sentences_id"], name: "index_entities_on_sentences_id"
+    t.text "text", null: false
+    t.string "entity_type", null: false
+    t.bigint "sentence_id", null: false
+    t.index ["sentence_id"], name: "index_entities_on_sentence_id"
   end
 
   create_table "sentences", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -24,5 +26,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_195641) do
     t.text "text", null: false
   end
 
-  add_foreign_key "entities", "sentences", column: "sentences_id"
+  add_foreign_key "entities", "sentences"
 end
