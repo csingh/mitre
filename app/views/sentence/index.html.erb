@@ -2,13 +2,15 @@
 
 
 <% @tagged_sentences.each do |s| %>
+	<div class="sentence">
 	<% s.each do |part| %>
 		<% if part[:tagged] %>
-			<p><strong><%= part[:text] %></strong></p>
+			<span class="entity"><%= part[:text] %> <strong><%= part[:type] %></strong></span>
 		<% else %>
-			<p><%= part[:text] %></p>
+			<span><%= part[:text] %></span>
 		<% end %>
 	<% end %>
+	</div>
 	<hr />
 <% end %>
 
