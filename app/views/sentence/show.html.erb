@@ -1,3 +1,25 @@
+<script type="text/javascript">
+  function getSelectedText() {
+    return window.getSelection().toString()
+  }
+
+  addEventListener("mouseup", (event) => {
+    var text = getSelectedText();
+    if (text != '') {
+      document.getElementById('create_entity').value = text;
+    }
+  });
+
+</script>
+
 <h1>Sentence ID <%= @sentence.id %></h1>
 
 <%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentence} %>
+
+<%= form_with url: "", method: :post do |form| %>
+  <%= form.label :text, "Entity text" %>
+  <%= form.text_field :text, id: "create_entity" %>
+  <%= form.label :type, "Entity type" %>
+  <%= form.text_field :type %>
+  <%= form.submit "Create Entity" %>
+<% end %>
