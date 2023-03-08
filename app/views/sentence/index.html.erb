@@ -1,10 +1,9 @@
 <h1>Sentences</h1>
 
-
 <div class="all-sentences-container">
 	<% @sentences.each_with_index do |s, i| %>
 		<div class="sentence-container">
-			<%= button_to "Edit", action: 'show', id: s.id %>
+			<%= link_to 'Edit', sentence_path(s) %>
 			<%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentences[i]} %>
 		</div>
 		<hr />

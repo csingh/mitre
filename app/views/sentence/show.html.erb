@@ -1,2 +1,3 @@
-<h1>Sentence#show</h1>
-<p>Find me in app/views/sentence/show.html.erb</p>
+<h1>Sentence ID <%= @sentence.id %></h1>
+
+<%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentence} %>
