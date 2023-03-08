@@ -5,7 +5,7 @@
 	<div class="sentence">
 	<% s.each do |part| %>
 		<% if part[:tagged] %>
-			<span class="entity"><%= part[:text] %> <strong><%= part[:type] %></strong></span>
+			<%= render_tagged_text(part[:text], part[:type]) %>
 		<% else %>
 			<span><%= part[:text] %></span>
 		<% end %>
