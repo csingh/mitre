@@ -1,16 +1,20 @@
-<h1>All Sentences</h1>
+<h1>Sentences</h1>
 
 
-<% @tagged_sentences.each do |s| %>
-	<div class="sentence">
-	<% s.each do |part| %>
-		<% if part[:tagged] %>
-			<%= render_tagged_text(part[:text], part[:type]) %>
-		<% else %>
-			<span><%= part[:text] %></span>
-		<% end %>
+<div class="all-sentences-container">
+	<% @tagged_sentences.each do |s| %>
+		<div class="sentence-container">
+			<%= button_to "Edit" %>
+			<div class="sentence">
+				<% s.each do |part| %>
+					<% if part[:tagged] %>
+						<%= render_tagged_text(part[:text], part[:type]) %>
+					<% else %>
+						<span><%= part[:text] %></span>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+		<hr />
 	<% end %>
-	</div>
-	<hr />
-<% end %>
-
+</div>

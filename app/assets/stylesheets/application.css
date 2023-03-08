@@ -18,3 +18,14 @@
     padding: 5px;
     border-radius: 10px;
 }
+
+.all-sentences-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sentence-container {
+    display: flex;
+    gap: 10px;
+}
