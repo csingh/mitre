@@ -1,0 +1,9 @@
+<div class="sentence">
+	<% tagged_sentence.each do |part| %>
+		<% if part[:tagged] %>
+			<%= render_tagged_text(part[:text], part[:type]) %>
+		<% else %>
+			<span><%= part[:text] %></span>
+		<% end %>
+	<% end %>
+</div>

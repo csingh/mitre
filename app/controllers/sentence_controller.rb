@@ -1,10 +1,7 @@
 class SentenceController < ApplicationController
   def index
-    sentences = Sentence.all
-    @tagged_sentences = sentences.map(&:tagged_text)
-
-    puts "@tagged_sentences:"
-    puts @tagged_sentences
+    @sentences = Sentence.all
+    @tagged_sentences = @sentences.map(&:tagged_text)
   end
 
   def show

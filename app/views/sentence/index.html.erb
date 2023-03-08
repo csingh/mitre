@@ -2,18 +2,10 @@
 
 
 <div class="all-sentences-container">
-	<% @tagged_sentences.each do |s| %>
+	<% @sentences.each_with_index do |s, i| %>
 		<div class="sentence-container">
-			<%= button_to "Edit" %>
-			<div class="sentence">
-				<% s.each do |part| %>
-					<% if part[:tagged] %>
-						<%= render_tagged_text(part[:text], part[:type]) %>
-					<% else %>
-						<span><%= part[:text] %></span>
-					<% end %>
-				<% end %>
-			</div>
+			<%= button_to "Edit", action: 'show', id: s.id %>
+			<%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentences[i]} %>
 		</div>
 		<hr />
 	<% end %>
