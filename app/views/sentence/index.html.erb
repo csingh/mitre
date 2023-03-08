@@ -1,0 +1,14 @@
+<h1>All Sentences</h1>
+
+
+<% @tagged_sentences.each do |s| %>
+	<% s.each do |part| %>
+		<% if part[:tagged] %>
+			<p><strong><%= part[:text] %></strong></p>
+		<% else %>
+			<p><%= part[:text] %></p>
+		<% end %>
+	<% end %>
+	<hr />
+<% end %>
+
