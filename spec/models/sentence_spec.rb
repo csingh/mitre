@@ -18,18 +18,43 @@ RSpec.describe Sentence, type: :model do
     end
   end
 
-  describe "#match_entities" do
+  describe "#_match_entities" do
     it "returns matched entities and characters to highlight" do
       s = Sentence.create!(text: "One two three one")
       e1 = Entity.create!(text: "one", entity_type: "MONEY", sentence: s)
       e2 = Entity.create!(text: "two", entity_type: "GPE", sentence: s)
 
-      matched_entities = s.match_entities
+      matched_entities = s._match_entities
       
       expect(matched_entities.length).to eq(3)
       expect(matched_entities[0]).to eq(first: 0, last: 2, text: "One", type: "MONEY")
       expect(matched_entities[1]).to eq(first: 14, last: 16, text: "one", type: "MONEY")
       expect(matched_entities[2]).to eq(first: 4, last: 6, text: "two", type: "GPE")
+    end
+  end
+
+  describe "#tagged_text" do
+    it "should return the untagged text if no matched entities" do
+      s = Sentence.create!(text: "One two three one")
+      e1 = Entity.create!(text: "four", entity_type: "MONEY", sentence: s)
+
+      tagged_text = s.tagged_text
+
+      expect(tagged_text.length).to eq(1)
+      expect(tagged_text.first[:text]).to eq(s.text)
+    end
+
+    it "should return tagged and untagged portions in order" do
+      s = Sentence.create!(text: "One two three")
+      e1 = Entity.create!(text: "one", entity_type: "MONEY", sentence: s)
+      e2 = Entity.create!(text: "three", entity_type: "GPE", sentence: s)
+
+      tagged_text = s.tagged_text
+
+      expect(tagged_text.length).to eq(3)
+      expect(tagged_text[0]).to eq(tagged: true, text: "One", type: "MONEY")
+      expect(tagged_text[1]).to eq(tagged: false, text: " two ")
+      expect(tagged_text[2]).to eq(tagged: true, text: "three", type: "GPE")
     end
   end
 end

@@ -2,10 +2,13 @@ class Sentence < ApplicationRecord
 	has_many :entities
 
 	# Returns a list of entity matches for the sentence, including the characters to highlight
-	def match_entities
-		# TODO: handle entity highlight collisions
+	# Meant to be a helper, and not to be called directly
+	def _match_entities
+		# TODO: maybe handle entity highlight collisions
 	    # E.g. if there are 2 entities with text: "Apple" and "Apple Org", how to figure out which is applied first
-	    # Possible hacky solution: When doing replacements, do a gsub to input some special markers like @@@ on both ends. If marker is found in a later match then need to figure out which entity is a subset of another
+	    # Ideas:
+	    # 	- When matching an entity, check oif any other entites contain that entity as a substring. If yes, ignore tihs substring entity and continue checks
+	    # 	- Or when actually creating Entities, we could assign it some sort of priority number to help resolve conflicts
 
 	    all_matches = []
 
@@ -29,7 +32,8 @@ class Sentence < ApplicationRecord
 	end
 
 	# Construct a list representation of the sentence, separating out tagged and untagged portions
-	def construct_tagged_text(entity_matches)
+	def tagged_text
+		entity_matches = self._match_entities
 		tagged_sentence = []
 
 		# i = sentence position
