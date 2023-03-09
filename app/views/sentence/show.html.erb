@@ -19,6 +19,8 @@
   </div>
 <% end %>
 
+<%= link_to 'Back', sentences_list_path %>
+
 <h1>Sentence ID <%= @sentence.id %></h1>
 
 <%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentence} %>
