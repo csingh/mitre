@@ -56,5 +56,18 @@ RSpec.describe Sentence, type: :model do
       expect(tagged_text[1]).to eq(tagged: false, text: " two ")
       expect(tagged_text[2]).to eq(tagged: true, text: "three", type: "GPE")
     end
+
+    it "should return tagged and untagged portions in order even when entities are not" do
+      s = Sentence.create!(text: "One two three")
+      e2 = Entity.create!(text: "three", entity_type: "GPE", sentence: s)
+      e1 = Entity.create!(text: "one", entity_type: "MONEY", sentence: s)
+
+      tagged_text = s.tagged_text
+
+      expect(tagged_text.length).to eq(3)
+      expect(tagged_text[0]).to eq(tagged: true, text: "One", type: "MONEY")
+      expect(tagged_text[1]).to eq(tagged: false, text: " two ")
+      expect(tagged_text[2]).to eq(tagged: true, text: "three", type: "GPE")
+    end
   end
 end

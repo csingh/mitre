@@ -33,7 +33,7 @@ class Sentence < ApplicationRecord
 
 	# Construct a list representation of the sentence, separating out tagged and untagged portions
 	def tagged_text
-		entity_matches = self._match_entities
+		entity_matches = self._match_entities.sort_by { |ent| ent[:first] }
 		tagged_sentence = []
 
 		# i = sentence position
