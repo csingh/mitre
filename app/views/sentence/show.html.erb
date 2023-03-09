@@ -16,7 +16,8 @@
 
 <%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentence} %>
 
-<%= form_with url: "", method: :post do |form| %>
+<%= form_with url: "/entity/create", method: :post do |form| %>
+  <%= form.hidden_field :id, value: @sentence.id %>
   <%= form.label :text, "Entity text" %>
   <%= form.text_field :text, id: "create_entity" %>
   <%= form.label :type, "Entity type" %>
