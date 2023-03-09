@@ -7,5 +7,6 @@ class SentenceController < ApplicationController
   def show
     @sentence = Sentence.find(params[:id])
     @tagged_sentence = @sentence.tagged_text
+    @error = params[:error]
   end
 end

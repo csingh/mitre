@@ -12,6 +12,13 @@
 
 </script>
 
+
+<% if @error %>
+  <div class='error-container'>
+    <h1><%= @error %></h1>
+  </div>
+<% end %>
+
 <h1>Sentence ID <%= @sentence.id %></h1>
 
 <%= render partial: "sentence", locals: { tagged_sentence: @tagged_sentence} %>
