@@ -14,7 +14,8 @@ class Sentence < ApplicationRecord
 
 		self.entities.each do |e|
 			# Not the most intuitive, but a nice way to get MatchData for all string matches
-			matches = self.text.downcase.to_enum(:scan, e.text.downcase).map { Regexp.last_match }
+			escaped_text = Regexp.escape(e.text)
+			matches = self.text.to_enum(:scan, /(?<=^| )#{escaped_text}(?=$| )/i).map { Regexp.last_match }
 
 			matches.each do |m|
 				first = m.begin(0)
