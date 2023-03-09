@@ -20,6 +20,7 @@ class Sentence < ApplicationRecord
 			matches.each do |m|
 				first = m.begin(0)
 				last = m.end(0) - 1
+				# TODO: since this hash structure is used across the code, should probably make a simple class / struct out of this
 				all_matches << {
 					first: first,
 					last: last,
